@@ -1,0 +1,19 @@
+{
+ "MyFirstDatabase": 
+	[
+	{
+	"id":"1",
+	"item_Name":"monitor",
+	"discount":"55%",
+	"price":239,
+	"quantity":331
+	},
+	{
+	"id":"2",
+	"item_Name":"monitor_nany",
+	"discount":"78%",
+	"price":84599,
+	"quantity":39039
+	}
+	]
+}

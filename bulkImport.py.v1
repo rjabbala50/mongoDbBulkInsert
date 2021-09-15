@@ -3,7 +3,6 @@
 ... @author Vrushali V
 ... @since September 15, 2021, 2.30 AM IST 
 '''
-import json
 
 COLLECTION_NAME   = "MyFirstDatabase"
 CLUSTER_NAME      = "cluster0.gxrbo.mongodb.net"
@@ -11,8 +10,9 @@ MONGO_PREFIX      = "mongodb+srv"
 DATABASE_NAME     = "My_shopping_list"
 DATABASE_USERNAME = "m001-student"
 DATABASE_PASSWORD = "m001-mongodb-basics"
-COLLECTION_MAX_SIZE = 2 #Working only for 2, debug later for bulk inserts.  
-SCHEMA_FILE       = '/home/ec2-user/PythonTutorial/bulkimport.schema' 
+COLLECTION_MAX_SIZE = 65535
+
+SCHEMA            = "{"+"item_Name"+":"+"monitor"+","+"discount"+":"+"55%"+","+"price"+":"+298+"}"
 
 def get_database(): 
     from pymongo import MongoClient
@@ -26,16 +26,10 @@ def get_database():
 
 if __name__ == "__main__" :
     dbname = get_database()
+
     collection_name = dbname[COLLECTION_NAME]
-    #read schema from file 
-    documents = []
-    f = open(SCHEMA_FILE,"r")
-    data = json.loads(f.read())
-    for document in data['MyFirstDatabase'] :
-        documents.append(document)
-    f.close()
     count = 1
     while count < COLLECTION_MAX_SIZE:
-        collection_name.insert_many(documents,False,False)
+        collection_name.insert_one(SCHEMA)
         count += 1 
 
